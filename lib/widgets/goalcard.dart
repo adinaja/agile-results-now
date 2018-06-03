@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import '../model/goal.dart';
-import '../data/repository.dart';
 
-class GoalCard extends StatefulWidget {
-  final DateTime date;
-  final Goal goal;
+typedef void GoalChangedCallback(Goal goal, bool done);
 
+class GoalCard extends StatelessWidget {
   GoalCard({
-      @required this.goal,
-      @required this.date
-  });
+      @required this.goal, @required this.onGoalChanged
+  }) : super(key: new ObjectKey(goal));
 
-  @override
-  createState() => new GoalCardState();
-}
-
-class GoalCardState extends State<GoalCard> {
+  final Goal goal;
+  final GoalChangedCallback onGoalChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +22,12 @@ class GoalCardState extends State<GoalCard> {
         child: new Row(
           children: <Widget>[
             new Expanded(
-              child: new Text(widget.goal.text)
+              child: new Text(goal.text)
             ),
             new Checkbox(
-              value: widget.goal.done,
+              value: goal.done,
               onChanged: (bool val) {
-                setState(() {
-                  widget.goal.done = val;
-                });
-
-                Repository.get().toggleGoal(widget.date, widget.goal);
-                
+                onGoalChanged(goal, val);
               })
           ],
         )
