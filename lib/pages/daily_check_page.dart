@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../model/week.dart';
 import '../widgets/goalcard.dart';
 import '../widgets/visioncard.dart';
+import '../widgets/customtitle.dart';
 import '../utils/date.dart';
 
 class DailyCheck extends StatelessWidget {
@@ -14,12 +15,8 @@ class DailyCheck extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List<Widget> widgets = [];
-    widgets.add(new Text(
-                  "Outcomes ${Helper.getText(date)}", 
-                  textAlign: TextAlign.left,
-                  style: new TextStyle(
-                    fontSize: 20.0
-                  ),
+    widgets.add(new CustomTitle(
+                  text: "Outcomes ${Helper.getText(date)}"
               ));
     
     for (var goal in week.goals) {
@@ -27,14 +24,10 @@ class DailyCheck extends StatelessWidget {
     }
 
     widgets.add(new Divider());
-    //TODO use weekvision
-    widgets.add(new Text(
-                  "Your week vision", 
-                  textAlign: TextAlign.left,
-                  style: new TextStyle(
-                    fontSize: 20.0
+    widgets.add(new CustomTitle(
+                  text: "Your week vision"
                   ),
-              ));
+              );
 
     for(var vision in week.visions){
       widgets.add(new VisionCard(vision: vision));

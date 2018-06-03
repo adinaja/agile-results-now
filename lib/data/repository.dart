@@ -1,6 +1,7 @@
 import 'database.dart';
 import 'dart:async';
 import '../model/week.dart';
+import '../model/vision.dart';
 import '../model/goal.dart';
 
 class Repository {
@@ -16,8 +17,8 @@ class Repository {
     database = ResultDatabase.get();
   }
 
-  Future writeWeek(DateTime data, Week week){
-    return database.writeWeek(data, week);
+  Future<Week> writeWeek(DateTime date, List<Vision> visions, List<Goal> goals){
+    return database.writeWeek(date, visions, goals);
   }
 
   Future<Week> getWeek(DateTime date)  {

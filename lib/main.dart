@@ -6,6 +6,7 @@ void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
 
+  //final DateTime date = DateTime.parse("2018-07-20 10:00:00");
   final DateTime date = new DateTime.now();
 
   // This widget is the root of your application.

@@ -8,7 +8,7 @@ class Goal {
   
 
   Goal({
-    @required this.weekId,
+    this.weekId,
     @required this.text,
     @required this.priority,
     @required this.done

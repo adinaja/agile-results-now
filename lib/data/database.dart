@@ -103,7 +103,7 @@ class ResultDatabase {
     }
   }
 
-  Future writeWeek(DateTime date, Week week) async{
+  Future<Week> writeWeek(DateTime date, List<Vision> visions, List<Goal> goals) async{
     var db = await _getDb();
 
     var weekNum = Helper.getWeekNumberFromDate(date);
@@ -121,8 +121,10 @@ class ResultDatabase {
       var week = new Week.fromMap(weekResult[0]);
       weekId = week.id;
     }
-    _writeVisions(weekId, week.visions);
-    writeGoals(weekId, date.weekday, week.goals);
+    await _writeVisions(weekId, visions);
+    await writeGoals(weekId, date.weekday, goals);
+
+    return getWeek(date);
   }
 
   Future<List<Goal>> _getGoals(int weekId, int weekDay) async {
